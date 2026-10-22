@@ -1556,6 +1556,15 @@ runs:
         else
           echo "Using a forked version"
           METRICS_IMAGE=metrics:forked-$METRICS_VERSION
+          # Use image pre-built by this fork (see .github/workflows/image.yml)
+          if [[ ! $METRICS_USE_PREBUILT_IMAGE =~ ^([Ff]alse|[Oo]ff|[Nn]o|0)$ ]]; then
+            echo "Using fork pre-built version $METRICS_TAG, will pull docker image from GitHub registry"
+            if docker image pull ghcr.io/halilsafakkilic/github-metrics:$METRICS_TAG; then
+              METRICS_IMAGE=ghcr.io/halilsafakkilic/github-metrics:$METRICS_TAG
+            else
+              echo "Failed to fetch docker image from GitHub registry, will rebuild it locally"
+            fi
+          fi
         fi
         echo "Image name: $METRICS_IMAGE"
 
