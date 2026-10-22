@@ -34,7 +34,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/halilsafakkilic/metrics:${{ steps.tag.outputs.tag }}
-            ghcr.io/halilsafakkilic/metrics:latest
+            ghcr.io/halilsafakkilic/github-metrics:${{ steps.tag.outputs.tag }}
+            ghcr.io/halilsafakkilic/github-metrics:latest
           labels: |
             org.opencontainers.image.source=https://github.com/halilsafakkilic/github-metrics
